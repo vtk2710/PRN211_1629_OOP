@@ -44,7 +44,23 @@ public class ProductManagement:IProduct
 
     public bool Delete(Product p)
     {
-        return true;
+        int index = 0;
+        //1. Tim phan tu p co trong mang hay khong ?
+        foreach(var item in this.listProduct)
+        {
+            index++;
+            if(item is not null && item.Id == p.Id)
+            {
+                //Neu tim thay roi thi xoa
+                for(int i = index; i < size - 1; i++)
+                {
+                    listProduct[i] = listProduct[i + 1];                
+                }
+                listProduct[this.size - 1] = null;
+                return true;
+            }
+        }
+        return false;
     }
 
     public void Display()
